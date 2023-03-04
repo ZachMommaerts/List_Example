@@ -8,12 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    private var strings = ["hello", "world", "hi", "globe", "howdy"]
+    @State private var stringsToAdd = [String]()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            
+            List(stringsToAdd, id: \.self){ string in
+                Text(string)
+            }
+            
+            Button(action: {
+                var stringToAdd = strings.randomElement()
+                stringsToAdd.append(stringToAdd!)
+            }, label: {
+                Text("Generate String")
+            })
         }
         .padding()
     }
